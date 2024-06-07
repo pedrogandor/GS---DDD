@@ -1,0 +1,227 @@
+public class UserService {
+    private UserDao userDao;
+
+    public UserService() {
+        
+        this.userDao = new UserDao();
+    }
+
+   
+    public List<User> getAllUsers() {
+        return userDao.getAllUsers();
+    }
+
+    
+    public void addUser(User user) {
+       
+        userDao.addUser(user);
+    }
+ public class Main {
+	    public static void main(String[] args) {
+	          Connection connection = null;
+ 
+	        try {
+	           
+	            Class.forName("com.mysql.cj.jdbc.Driver");
+ 
+	           
+	            String url = "jdbc:mysql://localhost:3306/seu_banco";
+ 
+	            
+	            String user = "seu_usuario";
+	            String password = "sua_senha";
+ 
+	           
+	            connection = DriverManager.getConnection(url, user, password);
+ 
+	            
+	            if (connection != null) {
+	                System.out.println("Conexão bem sucedida!");
+	            } else {
+	                System.out.println("Falha na conexão.");
+	            }
+ 
+	        } catch (ClassNotFoundException e) {
+	            System.out.println("Driver JDBC não encontrado: " + e.getMessage());
+	        } catch (SQLException e) {
+	            System.out.println("Erro ao conectar ao banco de dados: " + e.getMessage());
+	        } finally {
+	            // Fechar a conexão
+	            if (connection != null) {
+	                try {
+	                    connection.close();
+	                } catch (SQLException e) {
+	                    System.out.println("Erro ao fechar a conexão: " + e.getMessage());
+	                    
+	                    package bo;
+ 
+	                    import java.util.List;
+	                    import java.sql.Connection;
+	                    import java.sql.PreparedStatement;
+	                    import java.sql.ResultSet;
+	                    import java.sql.SQLException;
+ 
+	                    import database.DBConnection;
+	                    import exceptions.OceanException;
+	                    import model.Projeto;
+ 
+	                    public class ProjetoBO {
+	                        public List<Projeto> getAllProjetos() throws OceanException {
+	                            
+	                        }
+ 
+	                        public void insertProjeto(Projeto projeto) throws OceanException {
+	                           
+	                        }
+ 
+	                        public void deleteProjeto(int id) throws OceanException {
+	                           
+	                        }
+ 
+	                        public void updateProjeto(Projeto projeto) throws OceanException {
+   
+public UserService() {
+        
+        this.userDao = new UserDao();
+    }
+
+
+    public List<User> getAllUsers() {
+        return userDao.getAllUsers();
+    }
+
+    
+    public void addUser(User user) {
+       
+        userDao.addUser(user);
+    }
+ public class Main {
+	    public static void main(String[] args) {
+	          Connection connection = null;
+ 
+	        try {
+	           
+	            Class.forName("com.mysql.cj.jdbc.Driver");
+ 
+	           
+	            String url = "jdbc:mysql://localhost:3306/seu_banco";
+ 
+	            
+	            String user = "seu_usuario";
+	            String password = "sua_senha";
+ 
+	           
+	            connection = DriverManager.getConnection(url, user, password);
+ 
+	            
+	            if (connection != null) {
+	                System.out.println("Conexão bem sucedida!");
+	            } else {
+	                System.out.println("Falha na conexão.");
+	            }
+ 
+	        } catch (ClassNotFoundException e) {
+	            System.out.println("Driver JDBC não encontrado: " + e.getMessage());
+	        } catch (SQLException e) {
+	            System.out.println("Erro ao conectar ao banco de dados: " + e.getMessage());
+	        } finally {
+	
+	            if (connection != null) {
+	                try {
+	                    connection.close();
+	                } catch (SQLException e) {
+	                    System.out.println("Erro ao fechar a conexão: " + e.getMessage());
+	                    
+	                    package bo;
+package externalapis;
+
+import com.google.gson.Gson;
+import exceptions.ExternalAPIException;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.Scanner;
+
+public class ExternalAPIs {
+    private static final Gson gson = new Gson();
+
+    public static String consultarViaCEP(String cep) throws ExternalAPIException {
+        try {
+            URL url = new URL("https://viacep.com.br/ws/" + cep + "/json/");
+            Scanner scanner = new Scanner(url.openStream());
+            StringBuilder response = new StringBuilder();
+            while (scanner.hasNext()) {
+                response.append(scanner.nextLine());
+            }
+            scanner.close();
+            return response.toString();
+        } catch (IOException e) {
+            throw new ExternalAPIException("Erro ao consultar ViaCEP: " + e.getMessage());
+        }
+    }
+
+    // Outros métodos para integração com APIs externas
+}
+package database;
+
+import exceptions.DatabaseConnectionException;
+public class DatabaseConnection {
+    private static final String URL = "jdbc:mysql://localhost:3306/nome_do_banco";
+    private static final String USER = "usuario";
+    private static final String PASSWORD = "senha";
+
+    private static Connection connection;
+
+    private DatabaseConnection() {}
+
+    public static Connection getConnection() throws DatabaseConnectionException {
+        if (connection == null) {
+            try {
+                connection = DriverManager.getConnection(URL, USER, PASSWORD);
+            } catch (SQLException e) {
+                throw new DatabaseConnectionException("Erro ao conectar ao banco de dados: " + e.getMessage());
+            }
+        }
+        return connection;
+    }
+}
+package database;
+
+import exceptions.DatabaseConnectionException;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+public class DatabaseConnection {
+    private static final String URL = "jdbc:mysql://localhost:3306/nome_do_banco";
+    private static final String USER = "usuario";
+    private static final String PASSWORD = "senha";
+
+    private static Connection connection;
+
+    public static Connection getConnection() throws DatabaseConnectionException {
+        try {
+            if (connection == null || connection.isClosed()) {
+                connection = DriverManager.getConnection(URL, USER, PASSWORD);
+            }
+            return connection;
+        } catch (SQLException e) {
+            throw new DatabaseConnectionException("Erro ao conectar ao banco de dados: " + e.getMessage());
+        }
+    }
+
+    // Métodos CRUD
+    // Inserir, Deletar, Alterar, Selecionar
+}
+
+
+                        }
+	                    }
+ 
+	                    
+	                }
+	            }
+	        }
+	    }
+	}
